@@ -1,0 +1,17 @@
+{
+  "name": "test",
+  "version": "0.3.0",
+  "description": "",
+  "engines": {
+    "node": "8.9.1"
+  },
+  "main": "myapp.js",
+  "scripts": {
+    "start": "node index.js",
+  },
+  "keywords": [
+    "node",
+    "heroku",
+  ],
+  "license": "MIT"
+}
