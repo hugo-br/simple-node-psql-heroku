@@ -7,7 +7,7 @@
   },
   "main": "myapp.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node myapp.js",
   },
   "keywords": [
     "node",
