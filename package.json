@@ -8,10 +8,11 @@
   "main": "myapp.js",
   "scripts": {
     "start": "node myapp.js",
+	"test": "node test.js"
   },
   "keywords": [
     "node",
-    "heroku",
+    "heroku"
   ],
   "license": "MIT"
 }
