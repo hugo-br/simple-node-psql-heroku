@@ -41,25 +41,32 @@ transporter.sendMail(mailOptions, function(error, info){
   } else if (req.url == '/data') {
 
   
-const { Client } = require('pg');
+const pg = require('pg');
 
-const client = new Client({
-  connectionString: process.env.DATABASE_URL,
-  ssl: true,
+const client = new pg.Client({	
+connectionString: process.env.DATABASE_URL || 'postgres://twzbcmdsopeunm:ef9229125cc13cef2aac5dc1a9bb041a9a2cf9bbca1b58887541a0738c5049c8@ec2-54-225-200-15.compute-1.amazonaws.com:5432/ddk275bpq3q8rh',
+ssl: true,
 });
 
-client.connect();
-var z = 'test';
-client.query('SELECT * FROM Persons;', (err, res) => {
+var z ='';
+client.connect(function(err) {
   if (err) throw err;
-  for (let row of res.rows) {
-	let t = JSON.stringify(row);
-    z += t;
-  }
-  client.end();
-});
+  
+  // connected
+  console.log("Connected!");
+  client.query("SELECT * FROM Persons", function (err, result) {
+    if (err) throw err;
+	 for (let rows of result.rows) {
+		z += "City : " + rows.city + "<br>";
+	}
+     console.log(z);
+	 res.write(z);
+  });
 	
-	res.write(z);
+});
+
+
+
 	
   } else {
   fs.readFile(filename, function(err, data) {
