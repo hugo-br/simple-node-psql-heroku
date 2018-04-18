@@ -49,16 +49,17 @@ const client = new Client({
 });
 
 client.connect();
-
-client.query('SELECT * FROM Persons;', (err, r) => {
+var z = 'test';
+client.query('SELECT * FROM Persons;', (err, res) => {
   if (err) throw err;
-  for (let row of r.rows) {
+  for (let row of res.rows) {
 	let t = JSON.stringify(row);
-    res.write(t);
+    z += t;
   }
   client.end();
 });
 	
+	res.write(z);
 	
   } else {
   fs.readFile(filename, function(err, data) {
