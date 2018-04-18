@@ -60,8 +60,13 @@ client.connect(function(err) {
 		z += "City : " + rows.city + "<br>";
 	}
      console.log(z);
+	 res.writeHead(200, {'Content-Type': 'text/html'});
 	 res.write(z);
+	 return res.end();
+	 
   });
+  
+  
 	
 });
 
