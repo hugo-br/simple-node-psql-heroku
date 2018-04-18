@@ -8,7 +8,7 @@ http.createServer(function (req, res) {
   var filename = "." + q.pathname;
   
   
-  if (req.url == '/mail') {
+if (req.url == '/mail') {
 	  
 // sending email
 var nodemailer = require('nodemailer');
@@ -38,6 +38,27 @@ transporter.sendMail(mailOptions, function(error, info){
 });
 
  
+  } else if (req.url == '/data') {
+
+  
+const { Client } = require('pg');
+
+const client = new Client({
+  connectionString: process.env.DATABASE_URL,
+  ssl: true,
+});
+
+client.connect();
+
+client.query('SELECT * FROM Persons;', (err, res) => {
+  if (err) throw err;
+  for (let row of res.rows) {
+    res.write(JSON.stringify(row));
+  }
+  client.end();
+});
+	
+	
   } else {
   fs.readFile(filename, function(err, data) {
     if (err) {
