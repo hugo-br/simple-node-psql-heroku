@@ -50,10 +50,11 @@ const client = new Client({
 
 client.connect();
 
-client.query('SELECT * FROM Persons;', (err, res) => {
+client.query('SELECT * FROM Persons;', (err, r) => {
   if (err) throw err;
-  for (let row of res.rows) {
-    res.write(JSON.stringify(row));
+  for (let row of r.rows) {
+	let t = JSON.stringify(row);
+    res.write(t);
   }
   client.end();
 });
